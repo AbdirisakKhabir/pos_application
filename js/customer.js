@@ -138,6 +138,7 @@ function deleteInfo(id) {
       let tr = "";
       if (status) {
         swal("Good job!", response, "success");
+        header.location.href = "../views/customers.php";
       } else {
         swal("Good job!", response, "danger");
       }

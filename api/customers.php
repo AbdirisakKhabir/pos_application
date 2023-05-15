@@ -1,4 +1,5 @@
 <?php
+
     //create DB connection
     include '../config/conn.php';
     //create Register API
@@ -46,11 +47,12 @@
 
     //read All Data from DB API
     function get_customers($conn){
+        extract($_POST);
         //we use the variables future 
         $data = array();
         $response_data = array();
-
-        $query = "SELECT `id`, `customer_name`, `city`, `phone` FROM `customers` WHERE 1";
+     
+        $query = "SELECT `id`, `customer_name`, `phone`, `city` FROM `customers` WHERE `user_id` = '$user_id' ";
         $result = $conn->query($query);
 
         if($result){

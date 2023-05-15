@@ -163,6 +163,7 @@ function deleteInfo(id) {
 function fill_customer() {
   let sendingData = {
     action: "get_customers",
+    user_id: user_id,
   };
   $.ajax({
     method: "POST",
