@@ -34,7 +34,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="">Amount</label>
-                                                <input type="number" name="amount" id="amount" class="form-control amount" placeholder="Amount" required>
+                                                <input type="text" name="amount" id="amount" class="form-control amount" placeholder="Amount" required>
                                             </div>
                                                 </div>
                                 

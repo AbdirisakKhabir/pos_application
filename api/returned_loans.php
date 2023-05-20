@@ -48,6 +48,24 @@
         echo json_encode($data);
     };
     
+    //Delete one Credit
+    function delete_returned_loan($conn){
+        //extract POST you able to access all the columns of DB
+        extract($_POST);
+        //we use the variables future 
+        $data = array();
+
+        $query = "DELETE FROM `returned_loans` WHERE id = '$id'";
+        $result = $conn->query($query);
+
+        if($result){
+            $data = array("status" => true, "data" => "Deleted Successfully");
+        }else {
+                $data = array("status" => false, "data" => $conn->error);
+            }
+            echo json_encode($data);
+};
+    
     if(isset($_POST['action'])){
         $action = $_POST['action'];
         $action($conn);

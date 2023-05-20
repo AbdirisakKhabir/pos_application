@@ -67,8 +67,9 @@
                                                 <table class="table" id="usersTable">
                                                     <thead>
                                                        <th>Id</th>
-                                                       <th>Username</th>
                                                        <th>Name</th>
+                                                       <th>Username</th>
+                                                       <th>Phone</th>
                                                        <th>Status</th>
                                                        <th>Action</th>
                                                     </thead>
@@ -80,6 +81,7 @@
                                                                     <td> <?php echo $row['id'] ?></td>
                                                                     <td> <?php echo $row['name'] ?></td>
                                                                     <td> <?php echo $row['username'] ?></td>
+                                                                    <td> <?php echo $row['phone'] ?></td>
                                                                     <td> <?php echo $row['user_status'] ?></td>
                                                                     <td> <?php echo "
                                                                    <a class='btn btn-info text-white update_info' update_id=${row['id']}>
@@ -151,7 +153,12 @@
                                                 <input type="text" name="username" id="username" class="form-control">
                                             </div>
                                                 </div>
-                                           
+                                                <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">Phone</label>
+                                                <input type="text" name="phone" id="phone" class="form-control">
+                                            </div>
+                                                </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label for="">User Status</label>

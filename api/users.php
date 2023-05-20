@@ -16,7 +16,7 @@ if (session_status() == PHP_SESSION_NONE) {
         extract($_POST);
         //create Query
          $encpass = password_hash($password, PASSWORD_BCRYPT);
-        $query = "INSERT INTO `system_users`(`name`, `username`, `password`) VALUES('$name', '$username', '$encpass')";
+        $query = "INSERT INTO `system_users`(`name`, `username`,`phone`, `password`) VALUES('$name', '$username','$phone', '$encpass')";
         //execute the Query
         $result = $conn->query($query);
         //after the execution, Check if the API is success or Failure
@@ -35,7 +35,7 @@ if (session_status() == PHP_SESSION_NONE) {
         //make POST RESQUEST all data from DB are inside this POST Request
         extract($_POST);
         //create Query
-        $query = "UPDATE system_users set `name` = '$name', `username` = '$username', `user_status` = '$user_status' WHERE `id` = '$id'";
+        $query = "UPDATE system_users set `name` = '$name', `username` = '$username',`phone` = '$phone', `user_status` = '$user_status' WHERE `id` = '$id'";
         //execute the Query
         $result = $conn->query($query);
         //after the execution, Check if the API is success or Failure
@@ -54,7 +54,7 @@ if (session_status() == PHP_SESSION_NONE) {
         $data = array();
         $response_data = array();
 
-        $query = " SELECT `id`, `username`, `user_status` FROM `system_users` WHERE 1";
+        $query = " SELECT `id`, `username`, `user_status`, `phone` FROM `system_users` WHERE 1";
         $result = $conn->query($query);
 
         if($result){

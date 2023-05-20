@@ -72,10 +72,44 @@ $("#add_returned_loan").on("submit", function (event) {
   });
 });
 
+// Delete returned Loan Function
+//create function that returns the category information when you Delete
+function delete_returned_loan_function(id) {
+  let sendingData = {
+    action: "delete_returned_loan",
+    id: id,
+  };
+  $.ajax({
+    method: "POST",
+    dataType: "JSON",
+    url: "../api/returned_loans.php",
+    data: sendingData,
+    success: function (data) {
+      let status = data.status;
+      let response = data.data;
+      if (status) {
+        swal("Good job!", response, "success");
+        window.location.href = "../views/returned_loans.php";
+      } else {
+        swal("Good job!", response, "danger");
+      }
+    },
+    error: function (data) {},
+  });
+}
+
 //get the delete Expense and pass the delete Function
 $("#returnedLoansTable").on("click", "a.delete", function () {
   let id = $(this).attr("delete_id");
-  if (confirm("Are you sure you want to Delete?")) {
-    delete_returned_loan(id);
-  }
+  swal({
+    title: "Are you sure?",
+    text: "Once deleted, you will not be able to recover this Returned Loans!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
+      delete_returned_loan_function(id);
+    }
+  });
 });

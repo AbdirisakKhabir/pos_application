@@ -53,7 +53,7 @@ if($email == false){
                             <div class="pro-head">
                                
                                
-                                <span><?php echo $_SESSION['username']  ?></span>
+                                <span><?php echo $_SESSION['name']  ?></span>
                               
                             </div>
                             <ul class="pro-body">

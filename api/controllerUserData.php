@@ -3,6 +3,7 @@ session_start();
 include '../config/conn.php';
 $email = "";
 $name = "";
+
 $errors = array();
     //if user click continue button in forgot password form
     if(isset($_POST['check-email'])){
@@ -87,14 +88,14 @@ $errors = array();
             $fetch = mysqli_fetch_assoc($res);
             $fetch_pass = $fetch['password'];
             if(password_verify($password, $fetch_pass)){
-                $_SESSION['username'] = $email;
                 $status = $fetch['user_status'];
                 $_SESSION['id'] = $fetch['id'];
                 $_SESSION['name'] = $fetch['name'];
+                $_SESSION['phone'] = $fetch['phone'];
                 if($status == 'Active'){
                 $_SESSION['username'] = $email;
-                $_SESSION['name'] = $name;
-                $_SESSION['status'] = $status;
+                // $_SESSION['phone'] = $phone;
+              
                 
                     header('location: dashboard.php');
                 }else{

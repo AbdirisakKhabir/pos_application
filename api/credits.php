@@ -136,7 +136,7 @@
     };
 
   
-    //read one Expense Info API
+    //read one Credit Info API
     function get_credit_phone($conn){
         //extract POST you able to access all the columns of DB
         extract($_POST);

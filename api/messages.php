@@ -1,13 +1,12 @@
 <?php
-include '../config/conn.php';
 
+include '../config/conn.php';
 function processSms($to, $customer_name, $amount) {
   include '../api/credentials.php';
-  // $amount_query = "SELECT amount FROM credits WHERE phone = $to";
-  // $result = mysqli_query($conn, $amount_query);
-  // $row = mysqli_fetch_assoc($result);
-  // $my_message = "Shirkada Taam Technology Waxay ku Ogaysiinaysaa Inay Gaadhay Wakhtigii aad Deynta soo Bixin Lahayd Xaddi Lacageed oo Dhan $row";
-        $message= "$customer_name" . ", Macmiil Shirkada Taam Solutions Waxay ku Ogaysiinaysaa inay Gaadhay Wakhtigii aad Deynta soo Celin lahayd, Xaddi Lacageed oo dhan $" . $amount;
+
+   $phone =  $_SESSION['phone'];
+    $message= "$customer_name" . ", Macmiil Shirkada Taam Solutions Waxay ku Ogaysiinaysaa inay Gaadhay Wakhtigii aad soo Celin lahayd Deynta, Xaddi Lacageed oo dhan $" . $amount . " Wixii Faahfaahin ah Kala Xidhiidh " . $phone;
+
         $msg = str_ireplace(" ", "%20", $message);
         $username = $username;
         $password = $password;

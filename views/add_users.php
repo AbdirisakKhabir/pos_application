@@ -34,6 +34,12 @@
                                                 <input type="text" name="username" id="username" class="form-control">
                                             </div>
                                                 </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">Phone</label>
+                                                <input type="text" name="phone" id="phone" class="form-control">
+                                            </div>
+                                                </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
                                                     <label for="">Password</label>
