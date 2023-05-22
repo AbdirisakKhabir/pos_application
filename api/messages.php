@@ -5,14 +5,14 @@ function processSms($to, $customer_name, $amount) {
   include '../api/credentials.php';
 
    $phone =  $_SESSION['phone'];
-    $message= "$customer_name" . ", Macmiil Shirkada Taam Solutions Waxay ku Ogaysiinaysaa inay Gaadhay Wakhtigii aad soo Celin lahayd Deynta, Xaddi Lacageed oo dhan $" . $amount . " Wixii Faahfaahin ah Kala Xidhiidh " . $phone;
+   $message = $customer_name . ", Macmiil Shirkada Taam Solutions Waxay ku Ogaysiinaysaa inay Gaadhay Wakhtigii aad soo Celin lahayd Deynta, Xaddi Lacageed oo dhan $" . $amount . " Wixii Faahfaahin ah Kala Xidhiidh " . $phone;
 
         $msg = str_ireplace(" ", "%20", $message);
         $username = $username;
         $password = $password;
          $to = $to;
          $curentDate = date("d/m/Y");
-         $from = "Qaansheeg";
+         $from = $from;
          $key = $key;
 
     

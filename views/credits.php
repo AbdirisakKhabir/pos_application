@@ -27,12 +27,12 @@
 <?php
     include '../api/messages.php';
     if(isset($_POST['submit'])){
-        if(isset($_POST['phone'])){
-            foreach($_POST['phone'] as $phone){
-                $new_query = "SELECT customer_name, amount FROM credits WHERE phone = $phone";
+        if(isset($_POST['id'])){
+            foreach($_POST['id'] as $customer){
+                $new_query = "SELECT customer_name, amount, phone FROM credits WHERE id = $customer";
                 $new_res = mysqli_query($conn, $new_query);
                 $new_row =   mysqli_fetch_assoc($new_res);
-                processSms($phone, $new_row['customer_name'], $new_row['amount']);
+                processSms($new_row['phone'], $new_row['customer_name'], $new_row['amount']);
               
             }
         }
@@ -109,7 +109,7 @@
                        
                         ?>
                         <tr>     
-                        <td><input type="checkbox" name="phone[]"  class="form-check checkItem"  value="<?php echo $row['phone']; ?>" 
+                        <td><input type="checkbox" name="id[]"  class="form-check checkItem"  value="<?php echo $row['id']; ?>" 
                         ></td> 
                         <td> <?php echo $row['id'] ?></td>
                         <td> <?php echo $row['customer_name'] ?></td>

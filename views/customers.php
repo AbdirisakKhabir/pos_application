@@ -5,7 +5,7 @@
     $user_id = $_SESSION['id'];
 
     // Dynamic Limit
-     $limit = isset($_POST["limit-records"]) ? $_POST["limit-records"] : 10;
+     $limit = isset($_POST["limit-records"]) ? $_POST["limit-records"] : 2;
     // Current Pagination Page Number
     $page = (isset($_GET['page']) && is_numeric($_GET['page']) ) ? $_GET['page'] : 1;
     // Offset
@@ -187,27 +187,54 @@
 <!-- Search Script -->
 <script type="text/javascript">
 
-  $(document).ready(function(){
+
+function search_table() {
+    var value = $("#search").val().toLowerCase();
+
+    $("#customersTable tbody tr").each(function() {
+        var found = false;
+        $(this).find("td").each(function() {
+            if ($(this).text().toLowerCase().indexOf(value) !== -1) {
+                found = true;
+                return false; // Exit the loop if a match is found in the current row
+            }
+        });
+        if (found) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+}
+
+
+
+$(document).ready(function(){
     $("#search").keyup(function(){
         search_table($(this).val());
-    })
-    function search_table(value){
-        $("#customersTable tbody tr").each(function(){
-            var found = "false";
-            $(this).each(function(){
-                if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
-                {
-                    found = 'true';
-                }
-            });
-            if(found == 'true') {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        })
-    }
-  });
+})
+});
+
+
+
+
+// function search_table(value){
+//         $("#customersTable tbody tr").each(function(){
+//             var found = "false";
+//             $(this).each(function(){
+//                 if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
+//                 {
+//                     found = 'true';
+//                 }
+//             });
+//             if(found == 'true') {
+//                 $(this).show();
+//             } else {
+//                 $(this).hide();
+//             }
+//         })
+//     }
+
 
 
 </script>
