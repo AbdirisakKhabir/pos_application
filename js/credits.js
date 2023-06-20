@@ -3,48 +3,51 @@ fill_customer();
 //send what inside form
 $("#add_credit").on("submit", function (event) {
   event.preventDefault();
+  if ($("#customer_name").val() == 0) {
+    swal("Please Select Customer");
+  } else {
+    //get data from the form
+    let customer_name = $("#customer_name").val();
+    let city = $("#city").val();
+    let phone = $("#phone").val();
+    let amount = $("#amount").val();
+    let deadline = $("#deadline").val();
+    let description = $("#description").val();
 
-  //get data from the form
-  let customer_name = $("#customer_name").val();
-  let city = $("#city").val();
-  let phone = $("#phone").val();
-  let amount = $("#amount").val();
-  let deadline = $("#deadline").val();
-  let description = $("#description").val();
+    let sendingData = {};
 
-  let sendingData = {};
+    //data sending variable
+    sendingData = {
+      customer_name: customer_name,
+      amount: amount,
+      deadline: deadline,
+      city: city,
+      phone: phone,
+      description: description,
+      user_id: user_id,
+      action: "register_credit",
+    };
 
-  //data sending variable
-  sendingData = {
-    customer_name: customer_name,
-    amount: amount,
-    deadline: deadline,
-    city: city,
-    phone: phone,
-    description: description,
-    user_id: user_id,
-    action: "register_credit",
-  };
+    //send Data using AJAX
+    $.ajax({
+      method: "POST",
+      dataType: "JSON",
+      url: "../api/credits.php",
+      data: sendingData,
+      success: function (data) {
+        let status = data.status;
+        let response = data.data;
 
-  //send Data using AJAX
-  $.ajax({
-    method: "POST",
-    dataType: "JSON",
-    url: "../api/credits.php",
-    data: sendingData,
-    success: function (data) {
-      let status = data.status;
-      let response = data.data;
-
-      if (status) {
-        swal("Great Work", response, "success");
-        $("#add_credit")[0].reset();
-      } else {
-        swal("An error Occured", response, "danger");
-      }
-    },
-    error: function (data) {},
-  });
+        if (status) {
+          swal("Great Work", response, "success");
+          $("#add_credit")[0].reset();
+        } else {
+          swal("An error Occured", response, "danger");
+        }
+      },
+      error: function (data) {},
+    });
+  }
 });
 
 //send what inside form

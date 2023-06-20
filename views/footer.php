@@ -2,6 +2,7 @@
 	<script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="../assets/js/pcoded.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
     <script src="../js/sidebar.js"></script>
 </body>
 </html>

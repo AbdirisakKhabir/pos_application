@@ -15,7 +15,9 @@ if($email == false){
             </div>
             <div class="navbar-content scroll-div">
                 <ul class="nav pcoded-inner-navbar" id="userMenu">
-                  
+                <li  class="nav-item active">
+                        <a href="dashboard.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -57,6 +59,7 @@ if($email == false){
                               
                             </div>
                             <ul class="pro-body">
+                       
                                 <li><a href="logout.php" class="dropdown-item"><i class="feather icon-lock"></i> Logout</a></li>
                             </ul>
                         </div>

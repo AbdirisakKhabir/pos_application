@@ -48,7 +48,7 @@
                                                   <div class="col-sm-12">
                                              <div class="form-group">
                                             <label>Phone</label>
-                                            <input type="text" name="phone" id="phone" class="form-control" readonly>
+                                            <input type="text" name="phone" id="phone" class="form-control" readonly required>
                                         </div>                                  
                                     </div>
                                             <div class="col-sm-12">

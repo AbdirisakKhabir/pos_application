@@ -1,5 +1,6 @@
 fill_links();
 fill_categories();
+btnAction = "Insert";
 $("#addNew").on("click", function () {
   $("#linkModal").modal("show");
 });
@@ -47,6 +48,7 @@ $("#linkForm").on("submit", function (event) {
       let response = data.data;
 
       if (status) {
+        swal("Great Work", response, "success");
         swal("Great Work", response, "success");
         $("#linkForm")[0].reset();
         $("#linkModal").modal("hide");

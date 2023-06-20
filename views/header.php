@@ -20,6 +20,9 @@
     <!-- vendor css -->
     <link rel="stylesheet" href="../assets/css/style.css">
 
+    <!-- DataTable Plugin for Jquery -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+
     <style>
 
         .show-menu-now{

@@ -5,24 +5,11 @@
 
     // get the user ID from the Session
     $user_id = $_SESSION['id'];
-    // Dynamic Limit
-     $limit = isset($_POST["limit-records"]) ? $_POST["limit-records"] : 10;
-    // Current Pagination Page Number
-    $page = (isset($_GET['page']) && is_numeric($_GET['page']) ) ? $_GET['page'] : 1;
-    // Offset
-	$start = ($page - 1) * $limit;
     // Query
-    $query = "SELECT * FROM returned_loans WHERE user_id = $user_id LIMIT $start, $limit";
+    $query = "SELECT * FROM returned_loans WHERE user_id = $user_id";
     $result = mysqli_query($conn, $query);
     $credits = $result->fetch_all(MYSQLI_ASSOC);
  
-	$result1 = $conn->query("SELECT count(id) AS id FROM returned_loans WHERE user_id = $user_id");
-	$custCount = $result1->fetch_all(MYSQLI_ASSOC);
-	$total = $custCount[0]['id'];
-     // Calculate total pages
-	$pages = ceil( $total / $limit );
-	$prev = $page - 1;
-	$next = $page + 1;
 ?>
 
   <!-- [ Main Content ] start -->
@@ -46,15 +33,10 @@
                                         </div>
                                         <div class="card-block table-border-style">
                                             <div class="row">
-                                                <div class="col-sm-9">
-                                            <form action="" id="search_form">
-                                                    <input type="text" name="search" id="search" class="form-control mb-2" placeholder="Search Here">
-                                                </div>
-                                              
-                                                 
-                                            </form>
-                                              <div class="col-sm-2">
-                                                 <button type='submit' class="btn btn-primary" id='add_new'>Add Returned Loan</button>
+                                               
+                                    
+                                              <div class="col-sm-12">
+                                                 <button type='submit' class="btn btn-primary float-right mb-2" id='add_new'>Add Returned Loan</button>
                                                 </div>
                                             </div>
                                                 
@@ -157,24 +139,8 @@
                             </div>
                             <!-- [ Main Content ] end -->
                         </div>
-                                                  <!-- Pagination -->
-                                        <nav aria-label="Page navigation example mt-5">
-                                            <ul class="pagination justify-content-end">
-                                                <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
-                                                    <a class="page-link"
-                                                        href="<?php if($page <= 1){ echo '#'; } else { echo "?page=" . $prev; } ?>">Previous</a>
-                                                </li>
-                                                <?php for($i = 1; $i <= $pages; $i++ ): ?>
-                                                <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
-                                                    <a class="page-link" href="returned_loans.php?page=<?= $i; ?>"> <?= $i; ?> </a>
-                                                </li>
-                                                <?php endfor; ?>
-                                                <li class="page-item <?php if($page >= $pages) { echo 'disabled'; } ?>">
-                                                    <a class="page-link"
-                                                        href="<?php if($page >= $pages){ echo '#'; } else {echo "?page=". $next; } ?>">Next</a>
-                                                </li>
-                                            </ul>
-                                        </nav>
+                                                 
+                                  
                                         </div>
                                         </div>
                                     </div>
@@ -196,29 +162,10 @@
 <script src="../js/credits.js"></script>
 
 <!-- Search Script -->
-<script type="text/javascript">
+<script>
 
-  $(document).ready(function(){
-    $("#search").keyup(function(){
-        search_table($(this).val());
-    })
-    function search_table(value){
-        $("#returnedLoansTable tr").each(function(){
-            var found = "false";
-            $(this).each(function(){
-                if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
-                {
-                    found = 'true';
-                }
-            });
-            if(found == 'true') {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        })
-    }
-  });
-
+$(document).ready(function() {
+  $('#returnedLoansTable').DataTable();
+});
 
 </script>

@@ -34,9 +34,7 @@ function loadUserMenu() {
               menuElement += "</ul></li>";
             }
             menuElement += `
-                      <li  class="nav-item active">
-                        <a href="dashboard.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
-                    </li>
+                      
                      
 
 

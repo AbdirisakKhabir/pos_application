@@ -4,24 +4,11 @@
     include '../config/conn.php';
     $user_id = $_SESSION['id'];
 
-    // Dynamic Limit
-     $limit = isset($_POST["limit-records"]) ? $_POST["limit-records"] : 2;
-    // Current Pagination Page Number
-    $page = (isset($_GET['page']) && is_numeric($_GET['page']) ) ? $_GET['page'] : 1;
-    // Offset
-	$start = ($page - 1) * $limit;
     // Query
-    $query = "SELECT * FROM customers WHERE user_id = '$user_id'  LIMIT $start, $limit";
+    $query = "SELECT * FROM customers WHERE user_id = '$user_id'";
     $result = mysqli_query($conn, $query);
     $credits = $result->fetch_all(MYSQLI_ASSOC);
  
-	$result1 = $conn->query("SELECT count(id) AS id FROM customers  WHERE user_id = $user_id");
-	$custCount = $result1->fetch_all(MYSQLI_ASSOC);
-	$total = $custCount[0]['id'];
-     // Calculate total pages
-	$pages = ceil( $total / $limit );
-	$prev = $page - 1;
-	$next = $page + 1;
 ?>
 
 <style>
@@ -54,15 +41,8 @@
                                         
                                          
                                          <!-- Search Component -->
-                                          <div class="card-block table-border-style">
-                                        <form id="search_form">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                <input type="text" name="search" id="search" class="form-control mb-2" placeholder="Search Here">
-                                            </div>
-                                            </div>
-                                        </form>
-                                            
+                               
+
                                         <div class="card-block table-border-style">
                                             <div class="table-responsive">
                                                
@@ -105,23 +85,7 @@
 
 
                                              <!-- Pagination -->
-                                        <nav aria-label="Page navigation example mt-5">
-                                            <ul class="pagination justify-content-end">
-                                                <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
-                                                    <a class="page-link"
-                                                        href="<?php if($page <= 1){ echo '#'; } else { echo "?page=" . $prev; } ?>">Previous</a>
-                                                </li>
-                                                <?php for($i = 1; $i <= $pages; $i++ ): ?>
-                                                <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
-                                                    <a class="page-link" href="customers.php?page=<?= $i; ?>"> <?= $i; ?> </a>
-                                                </li>
-                                                <?php endfor; ?>
-                                                <li class="page-item <?php if($page >= $pages) { echo 'disabled'; } ?>">
-                                                    <a class="page-link"
-                                                        href="<?php if($page >= $pages){ echo '#'; } else {echo "?page=". $next; } ?>">Next</a>
-                                                </li>
-                                            </ul>
-                                        </nav>
+                                       
                                         <!-- Pagination Closed -->
 
 
@@ -185,56 +149,10 @@
 
 
 <!-- Search Script -->
-<script type="text/javascript">
+<script>
 
-
-function search_table() {
-    var value = $("#search").val().toLowerCase();
-
-    $("#customersTable tbody tr").each(function() {
-        var found = false;
-        $(this).find("td").each(function() {
-            if ($(this).text().toLowerCase().indexOf(value) !== -1) {
-                found = true;
-                return false; // Exit the loop if a match is found in the current row
-            }
-        });
-        if (found) {
-            $(this).show();
-        } else {
-            $(this).hide();
-        }
-    });
-}
-
-
-
-$(document).ready(function(){
-    $("#search").keyup(function(){
-        search_table($(this).val());
-})
+$(document).ready(function() {
+  $('#customersTable').DataTable();
 });
-
-
-
-
-// function search_table(value){
-//         $("#customersTable tbody tr").each(function(){
-//             var found = "false";
-//             $(this).each(function(){
-//                 if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
-//                 {
-//                     found = 'true';
-//                 }
-//             });
-//             if(found == 'true') {
-//                 $(this).show();
-//             } else {
-//                 $(this).hide();
-//             }
-//         })
-//     }
-
-
 
 </script>

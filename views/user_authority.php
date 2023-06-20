@@ -42,7 +42,7 @@
                                   <div class="col-xl-12">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Select Users</h5>
+                                            <h5>Select User</h5>
                                            
                                             <form id="userForm">
                                                     <div class="row">

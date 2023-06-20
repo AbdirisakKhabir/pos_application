@@ -3,24 +3,11 @@
     include 'sidebar.php'; 
     include '../config/conn.php';
     $user_id = $_SESSION['id'];
-    // Dynamic Limit
-     $limit = isset($_POST["limit-records"]) ? $_POST["limit-records"] : 20;
-    // Current Pagination Page Number
-    $page = (isset($_GET['page']) && is_numeric($_GET['page']) ) ? $_GET['page'] : 1;
-    // Offset
-	$start = ($page - 1) * $limit;
+
     // Query
-    $query = "SELECT * FROM credits WHERE user_id = $user_id LIMIT $start, $limit";
+    $query = "SELECT * FROM credits WHERE user_id = $user_id";
     $result = mysqli_query($conn, $query);
     $credits = $result->fetch_all(MYSQLI_ASSOC);
- 
-	$result1 = $conn->query("SELECT count(id) AS id FROM credits WHERE user_id = $user_id");
-	$custCount = $result1->fetch_all(MYSQLI_ASSOC);
-	$total = $custCount[0]['id'];
-     // Calculate total pages
-	$pages = ceil( $total / $limit );
-	$prev = $page - 1;
-	$next = $page + 1;
 ?>
 
 <!-- Logic of Sending SMS from Checkboxes -->
@@ -67,16 +54,7 @@
                                         <div class="card-header">
                                             <h5>Credits Data</h5>
                                         </div>
-                                
-                                         <!-- Search Component -->
-                                          <div class="card-block table-border-style">
-                                        <form id="search_form">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                <input type="text" name="search" id="search" class="form-control mb-2" placeholder="Search Here">
-                                            </div>
-                                            </div>
-                                        </form>
+                                      
                                         <div class="card-block table-border-style">
                                             <form action="credits.php" method="post">
                                             <div class="table-responsive">
@@ -151,27 +129,6 @@
                                                         ?>
                                                    </tbody>
                                                 </table>
-
-                                                  <!-- Pagination -->
-                                        <nav aria-label="Page navigation example mt-5">
-                                            <ul class="pagination justify-content-end">
-                                                <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
-                                                    <a class="page-link"
-                                                        href="<?php if($page <= 1){ echo '#'; } else { echo "?page=" . $prev; } ?>">Previous</a>
-                                                </li>
-                                                <?php for($i = 1; $i <= $pages; $i++ ): ?>
-                                                <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
-                                                    <a class="page-link" href="credits.php?page=<?= $i; ?>"> <?= $i; ?> </a>
-                                                </li>
-                                                <?php endfor; ?>
-                                                <li class="page-item <?php if($page >= $pages) { echo 'disabled'; } ?>">
-                                                    <a class="page-link"
-                                                        href="<?php if($page >= $pages){ echo '#'; } else {echo "?page=". $next; } ?>">Next</a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                  
-
                                             </div>
                                             </form>
                                         </div>
@@ -256,33 +213,12 @@
 <script src="../js/credits.js"></script>
 
 <!-- Search Script -->
-<script type="text/javascript">
 
-  $(document).ready(function(){
-    $("#search").keyup(function(){
-        search_table($(this).val());
-    })
-    function search_table(value){
-        $("#creditsTable tbody tr").each(function(){
-            var found = "false";
-            $(this).each(function(){
-                if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0)
-                {
-                    found = 'true';
-                }
-            });
-            if(found == 'true') {
-                $(this).show();  
-            } else {
-                $(this).hide();
-            }
-        })
-    }
-  });
-
-
+<script>
+    $(document).ready(function() {
+  $('#creditsTable').DataTable();
+});
 </script>
-
 <!-- Script for When the User Clicks the checkbox then all other checkboxes are selected -->
 <script>
   $(document).ready(function(){ 

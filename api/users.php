@@ -54,7 +54,7 @@ if (session_status() == PHP_SESSION_NONE) {
         $data = array();
         $response_data = array();
 
-        $query = " SELECT `id`, `username`, `user_status`, `phone` FROM `system_users` WHERE 1";
+        $query = " SELECT `id`,`name`, `username`, `user_status`, `phone` FROM `system_users` WHERE 1";
         $result = $conn->query($query);
 
         if($result){
